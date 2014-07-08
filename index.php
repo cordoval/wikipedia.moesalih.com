@@ -4,8 +4,6 @@ ini_set('display_errors', 0);
 
 include("px.017.php");
 
-
-
 function curl($url) {
 	$ch = curl_init($url); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -44,8 +42,7 @@ if ($page) {
 	$title = $px->xpath("//h1[@id='firstHeading']")->html();
 	$titleText = $px->xpath("//h1[@id='firstHeading']")->text();
 	$content = $px->xpath("//div[@id='mw-content-text']")->html();
-}
-else if (isset($about)) {
+} elseif (isset($about)) {
 	$class = "about";
 	$content = "
 	<h1>What is this?</h1>
@@ -56,8 +53,7 @@ else if (isset($about)) {
 	<small><a href='http://moesalih.com'>moesalih.com</a></small>
 	";
 
-}
-else if ($search) {
+} elseif ($search) {
 	$class = "search";
 
 	$response = curl("http://en.wikipedia.org/w/index.php?search=" . urlencode($search));
@@ -66,8 +62,7 @@ else if ($search) {
 	$title = "<h1 id='firstHeading'>Search results</h1>";
 	$titleText = $search;
 	$content = $px->xpath("//ul[@class='mw-search-results']")->html();
-}
-else {
+} else {
 	$class = "home";
 }
 
